@@ -44,44 +44,17 @@ No two runs feel identical. The longer you survive, the smarter the enemies get.
 - Persistent leaderboard with top 10 entries
 - Score system — kills, wave completion, damage penalty
 - Score popup feedback on every point change
-
-### UI & Polish
-- Full HUD — health, ammo, shield bars and wave/score display
-- Adaptation feed — animated notifications when enemies adapt
-- Wave countdown before each wave
-- Animated intro screen on game start
-- Main menu with options, keybind remapping and leaderboard
-- Game over screen with name entry and leaderboard submission
-
 ---
-
-## Controls
-
-| Action | Default |
-|---|---|
-| Move Left | A |
-| Move Right | D |
-| Jump | Space |
-| Sprint | Left Shift |
-| Drop Through Platform | S |
-| Melee Attack | Left Click |
-| Ranged Attack | Right Click |
-| Shield | E |
-
-All keybinds are remappable from the Options menu.
-
----
-
 ## How the Adaptive AI Works
 
-At the end of every wave, the `AIDirector` evaluates a `WaveBehaviourSnapshot` containing:
+At the end of every wave, the system evaluates your behaviour assesing things like:
 
 - Melee and ranged attack counts and accuracy
 - Kill breakdown by enemy type and attack type
 - Wave completion time
 - Average player movement speed
 
-From this data it produces an `AdaptationProfile` applied to the next wave:
+From this data it adjusts the enemies accordingly for the next wave:
 
 | Behaviour Observed | AI Response |
 |---|---|
@@ -95,7 +68,6 @@ From this data it produces an `AdaptationProfile` applied to the next wave:
 | 10 consecutive fast waves | Bonus HP + speed boosted enemies appear |
 
 ---
-
 ## Technical Details
 
 | Detail | Value |
@@ -110,73 +82,14 @@ From this data it produces an `AdaptationProfile` applied to the next wave:
 | Platform | PC (Windows) |
 
 ---
-
-## Project Structure
-
-```
-Assets/
-├── Animations/         # Animator controllers and animation clips
-│   ├── MeleeEnemy/
-│   ├── Player/
-│   └── RangedEnemy/
-├── Audio/
-│   ├── Music/
-│   └── SFX/
-├── Prefabs/            # Enemy, bullet, platform, pickup prefabs
-├── Scenes/
-│   ├── MainMenu
-│   └── ArenaScene
-├── Scripts/
-│   ├── AI/             # AIDirector, PlayerBehaviourTracker, WaveBehaviourSnapshot, AdaptationProfile
-│   ├── Arena/          # ArenaGenerator, CameraFollow, MapSpawnPoints, MapPickupPoint
-│   ├── Audio/          # AudioManager
-│   ├── Enemy/          # EnemyChase, RangedEnemy, EnemyHealth, EnemyAnimator, EnemyBullet, EnemyShieldVisual
-│   ├── Pickups/        # HealthPickup, PickupManager
-│   ├── Player/         # PlayerMovement, PlayerAim, PlayerHealth, PlayerMelee, PlayerRanged, PlayerShield, PlayerAnimator, AmmoSystem, Bullet, ShieldBlocker
-│   ├── UI/             # HUDManager, MenuManager, GameOverUI, LeaderboardUI, AdaptationNotifier, AdaptationPanelUI, KeybindEntryUI, KeybindsPanelUI, ScorePopup, TransitionManager, WaveCountdown
-│   └── Wave/           # WaveManager
-├── Sprites/
-│   ├── Background/
-│   ├── Fighter/
-│   ├── MeleeEnemy/
-│   ├── Pistol/
-│   ├── RangedEnemy/
-│   ├── Sword/
-│   └── Tiles/
-└── Tests/
-    ├── EditMode/       # AdaptiveAITests, ScoreTests, LeaderboardTests, SnapshotAIRulesTests, PlayerBehaviourTrackerTests, WaveScalingTests
-    └── PlayMode/       # PlayerMovementTests, PlayerHealthTests, AmmoSystemTests
-```
-
----
-
 ## Running the Project
 
 ### From Source
-1. Clone the repository
-2. Open the project in **Unity 6.4 (LTS)**
-3. Open `Assets/Scenes/MainMenu`
-4. Press **Play** in the Unity Editor
-
-### Build
-1. Go to **File → Build Settings**
-2. Ensure `MainMenu` is scene index 0 and `ArenaScene` is scene index 1
-3. Select **Windows x64**
-4. Click **Build**
+1. Clone or download the repository
+2. Open the folder downloaded
+3. Launch AdaptiveAIArena.exe
 
 ---
-
-## Testing
-
-The project includes 30+ unit tests using the Unity Test Framework.
-
-To run them:
-1. Open **Window → General → Test Runner**
-2. Click **EditMode** → **Run All** for logic tests
-3. Click **PlayMode** → **Run All** for runtime tests
-
----
-
 ## Developer
 
 **Kenneth Davies** — P2702519
